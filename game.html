@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      color: #333;
+      margin-top: 80px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .choices button {
+      background-color: #4c6ef5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .choices button:hover {
+      background-color: #364fc7;
+      transform: scale(1.05);
+    }
+
+    #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    #scoreboard {
+      margin-top: 25px;
+      font-size: 1.2em;
+    }
+
+    .reset-btn {
+      background-color: #e03131;
+      margin-top: 20px;
+    }
+
+    .reset-btn:hover {
+      background-color: #c92a2a;
+    }
+  </style>
+</head>
+<body>
+  <h1>🪨 Rock Paper Scissors ✂️</h1>
+
+  <div class="choices">
+    <button onclick="play('rock')">Rock 🪨</button>
+    <button onclick="play('paper')">Paper 📄</button>
+    <button onclick="play('scissors')">Scissors ✂️</button>
+  </div>
+
+  <div id="result"></div>
+  <div id="scoreboard">
+    Player: <span id="playerScore">0</span> | Computer: <span id="computerScore">0</span>
+  </div>
+
+  <button class="reset-btn" onclick="resetGame()">🔁 Reset Game</button>
+
+  <script>
+    let playerScore = 0;
+    let computerScore = 0;
+
+    function play(playerChoice) {
+      const choices = ["rock", "paper", "scissors"];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      let result = "";
+      if (playerChoice === computerChoice) {
+        result = "🤝 It's a Draw!";
+      } else if (
+        (playerChoice === "rock" && computerChoice === "scissors") ||
+        (playerChoice === "paper" && computerChoice === "rock") ||
+        (playerChoice === "scissors" && computerChoice === "paper")
+      ) {
+        result = `🎉 You Win! ${playerChoice} beats ${computerChoice}.`;
+        playerScore++;
+      } else {
+        result = `💻 Computer Wins! ${computerChoice} beats ${playerChoice}.`;
+        computerScore++;
+      }
+
+      document.getElementById("result").innerHTML = result;
+      document.getElementById("playerScore").textContent = playerScore;
+      document.getElementById("computerScore").textContent = computerScore;
+    }
+
+    function resetGame() {
+      playerScore = 0;
+      computerScore = 0;
+      document.getElementById("playerScore").textContent = playerScore;
+      document.getElementById("computerScore").textContent = computerScore;
+      document.getElementById("result").innerHTML = "Game reset! Let's play again!";
+    }
+  </script>
+</body>
+</html>
